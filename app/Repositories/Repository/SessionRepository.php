@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Repository;
 
-use App\Models\Film;
-use App\Repositories\FilmRepositoryInterface;
+use App\Models\Session;
+use App\Repositories\Interfeces\SessionInterface;
 
-class FilmRespository implements FilmRepositoryInterface
+class SessionRepository implements SessionInterface
 {
     /**
      * Create a new class instance.
      */
+   
+
     public function all(){
 
     }
     public function findById($id){
-        
+
     }
     public function create(array $data){
-      return  Film::create($data);
+      Session::create($data);  
     }
     public function update(array $data){
 

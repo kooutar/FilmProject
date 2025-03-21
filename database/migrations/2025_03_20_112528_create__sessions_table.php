@@ -17,7 +17,7 @@ return new class extends Migration
                 $table->id();
                 $table->enum('type',['VIP','Normale']);
                 $table->time('startTime');
-                $table->string('language');
+                $table->string('startTime');
                 $table->timestamps();
             });
         }
