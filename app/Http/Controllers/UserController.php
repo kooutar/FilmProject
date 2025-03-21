@@ -22,4 +22,14 @@ class UserController extends Controller
     $user= $this->UserService->registreUser($data);
     return response()->json(['sussess'=>$user]);
    }
+
+   public function login(Request $request)
+    {
+      $data=$request->validate([
+        
+        'email' => 'required|string|email|max:255',
+        'password' => 'required|string|min:6',
+    ]);
+        return $this->UserService->login($data);
+    }
 }

@@ -22,4 +22,18 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::create($data);
     }
+
+    public function login( array $data){
+        $credentials = ['email' => $data['email'], 'password' => $data['password']];
+  
+    if (!$token = auth('api')->attempt($credentials)) {
+        return response()->json(['error' => 'Non autorisé'], 401);
+    }
+      
+    return response()->json([
+        'token' => $token,
+        'expires_in' => auth('api')->factory()->getTTL() * 60
+    ]);
+
+    }
 }

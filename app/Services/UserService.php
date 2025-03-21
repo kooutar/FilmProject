@@ -19,6 +19,11 @@ class UserService
     public function registreUser($data){
         $data['password']=Hash::make($data['password']);
         return $this->UserRepository->create($data);
-
     }
+
+    public function login($data)
+    {
+        return $this->UserRepository->login($data);
+    }
+
 }
