@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\SalleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
 
@@ -15,6 +16,7 @@ Route::post('/login',[UserController::class,'login']);
 Route::middleware(['auth:api'])->group(function(){
     Route::resource('Film',FilmController::class);
     Route::resource('Session',SessionController::class);
+    Route::resource('salle',SalleController::class);
 });
 
 
