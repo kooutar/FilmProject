@@ -65,6 +65,7 @@ class FilmController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->FilmService->deleteFilmService($id);
+        return response()->json('delete with succes');
     }
 }

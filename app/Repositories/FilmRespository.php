@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Film;
-use Illuminate\Support\Facades\DB;
 use App\Repositories\FilmRepositoryInterface;
 
 class FilmRespository implements FilmRepositoryInterface
@@ -33,6 +32,10 @@ class FilmRespository implements FilmRepositoryInterface
 }
 
     public function delete($id){
-
+    $film=$this->findById($id);
+    if($film){
+        return $film->delete();
+        
+    }
     }
 }

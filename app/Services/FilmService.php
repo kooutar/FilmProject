@@ -23,4 +23,8 @@ class FilmService
     public function updateFilmService($data,$id){
         return $this->FilmRespository->update($data,$id);
     }
+
+    public function deleteFilmService($id){
+        return $this->FilmRespository->delete($id);
+    }
 }
