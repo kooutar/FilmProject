@@ -19,4 +19,8 @@ class FilmService
     public function AddFilmService($data){
         return $this->FilmRespository->create($data);
     }
+
+    public function updateFilmService($data,$id){
+        return $this->FilmRespository->update($data,$id);
+    }
 }

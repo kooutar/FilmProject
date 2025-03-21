@@ -56,7 +56,8 @@ class FilmController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $Film=$this->FilmService->updateFilmService($request->all(),$id);
+        return response()->json(['susses'=>$Film]);
     }
 
     /**
