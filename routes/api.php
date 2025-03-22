@@ -6,6 +6,8 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ClientMiddleware;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -13,10 +15,17 @@ use App\Http\Controllers\SessionController;
 
 Route::resource('Auth', UserController::class);
 Route::post('/login',[UserController::class,'login']);
-Route::middleware(['auth:api'])->group(function(){
+
+
+Route::middleware(['auth:api',AdminMiddleware::class])->group(function(){
     Route::resource('Film',FilmController::class);
     Route::resource('Session',SessionController::class);
     Route::resource('salle',SalleController::class);
+});
+
+
+Route::middleware(['auth:api',ClientMiddleware::class])->group(function(){
+    
 });
 
 

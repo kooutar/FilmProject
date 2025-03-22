@@ -18,6 +18,14 @@ class SessionService
       return $this->SessionRepository->create($data);
     }
 
+    public function UpdateSessionService($data,$id){
+        return $this->SessionRepository->update($data,$id);
+      }
+
+    public function deleteSessinService($id){
+        return $this->SessionRepository->delete($id);
+    }
+
     
 
 
