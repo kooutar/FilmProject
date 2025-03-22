@@ -17,6 +17,7 @@ class FilmRespository implements FilmRepositoryInterface
        return Film::find($id); 
     }
     public function create(array $data){
+       
       return  Film::create($data);
     }
     public function update(array $data, $id)

@@ -34,9 +34,11 @@ class FilmController extends Controller
                 'ageMin' => 'required|integer|min:0|max:100', // Age minimum entre 0 et 100
                 'genre' => 'required|string|max:100',
                 'trailer' => 'required|url', // Lien vers la bande-annonce
-                'id_admin' => 'required|exists:users,id', // Vérifie que l'admin existe
+              
             ]
         );
+        $data['id_admin']=auth()->id();
+       
         if($this->FilmService->AddFilmService($data)){
           $Film=$this->FilmService->AddFilmService($data);
          return response()->json(['susses'=>$Film]);
