@@ -53,4 +53,8 @@ class ReservationController extends Controller
     {
         //
     }
+
+    public function UpdatePaiment($id){
+        return $this->ReservationService->updateStatusPaimentService($id);
+    }
 }

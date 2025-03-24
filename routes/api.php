@@ -26,7 +26,8 @@ Route::middleware(['auth:api',AdminMiddleware::class])->group(function(){
 
 
 Route::middleware(['auth:api',ClientMiddleware::class])->group(function(){
-    Route::resource('Reservation',ReservationController::class);   
+    Route::resource('Reservation',ReservationController::class); 
+    Route::put('/paiment/{id}',[ReservationController::class,'UpdatePaiment']);  
 });
 
 

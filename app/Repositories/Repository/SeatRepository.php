@@ -25,7 +25,7 @@ class SeatRepository implements SeatInterface
 
       }
       public function delete($id){
-
+          
       }
 
       public function updateReservation($idseat,$idreservation){

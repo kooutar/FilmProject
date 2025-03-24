@@ -18,4 +18,7 @@ class ReservationService
     public function AddReservationService(array $data)  {
         return $this->ReservationRepository->create($data);
     }
+    public function updateStatusPaimentService($idReservation){
+        return $this->ReservationRepository->updateStatusPaiment($idReservation);
+    }
 }

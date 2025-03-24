@@ -31,12 +31,28 @@ class ReservationRepository implements ReservationInterface
            'id_client'=>auth()->id(),
            'id_seance'=>$data['id_seance'],
            'montant'=>$data['montant'],
+           'created_at' => now(),
+           'updated_at' => now(),
         ]);
         $seat=$this->SeatReposotory->findById($data['id_seat']);
       
         $this->SeatReposotory->updateReservation($seat->id,  $reservation_id);
      }
 
-     public function update(array $data){}
+     public function update(array $data){
+
+     }
      public function delete($id){}
+     public function updateStatusPaiment($idReservation)
+     {
+    DB::table('_reservation')
+        ->where('id', $idReservation)
+        ->update([
+            'status' => 'paid',  // Nouvelle valeur
+            'updated_at' => now()  // Mise à jour du timestamp
+        ]);
+
+    return response()->json(['message' => 'Statut de paiement mis à jour avec succès']);
+  }
+
 }
