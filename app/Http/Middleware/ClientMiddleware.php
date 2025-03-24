@@ -18,7 +18,7 @@ class ClientMiddleware
         $user = auth()->user(); // Récupère l'utilisateur connecté
 
         // Vérifie si l'utilisateur est connecté et est un administrateur
-        if (!$user || $user->role !== 'cleint') {
+        if (!$user || $user->role !== 'client') {
             return response()->json(['error' => 'Accès non autorisé'], 403); // 403 Forbidden
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ReservationService;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -9,6 +10,11 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $ReservationService;
+     public function __construct(ReservationService $ReservationService)
+     {
+        $this->ReservationService=$ReservationService;
+     } 
     public function index()
     {
         //
@@ -19,7 +25,9 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $data=$request->all();
+       $data['id_client']=auth()->id();
+       $this->ReservationService->AddReservationService($data);
     }
 
     /**

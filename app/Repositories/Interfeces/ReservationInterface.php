@@ -2,9 +2,8 @@
 
 namespace App\Repositories\Interfeces;
 
-interface SeatInterface
+interface ReservationInterface
 {
-    //
     public function all();
     public function findById($id);
     public function create(array $data);

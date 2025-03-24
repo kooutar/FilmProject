@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
@@ -25,7 +26,7 @@ Route::middleware(['auth:api',AdminMiddleware::class])->group(function(){
 
 
 Route::middleware(['auth:api',ClientMiddleware::class])->group(function(){
-    
+    Route::resource('Reservation',ReservationController::class);   
 });
 
 

@@ -21,8 +21,10 @@ class SessionController extends Controller
         'type' => 'required|in:VIP,Normale', // Doit être soit 'VIP' soit 'Normale'
         'startTime' => 'required|date_format:H:i', // Doit être un format d'heure valide (HH:MM)
         'language' => 'required|string|max:50', // Langue obligatoire, max 50 caractères
+        'id_film' => 'required|integer|exists:films,id' // ✅ Vérifie que le film existe
         ]
         );
+      //   dd($request->all());
        $session= $this->SessionService->AddSessionService($data);
         return response()->json(['susses'=>$session]);
   }

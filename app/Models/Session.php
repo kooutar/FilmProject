@@ -8,7 +8,6 @@ class Session extends Model
 {
     //
     protected $table="seance";
-    protected $fillable=[
-        'type','startTime','startTime'
-    ];
+    protected $fillable = ['type', 'startTime', 'language', 'id_film']; // ✅ Ajoutez 'id_film'
+
 }

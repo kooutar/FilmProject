@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['VIP', 'Normale']);
             $table->time('startTime'); // Garder uniquement cette ligne
+            $table->string('language');
+            $table->unsignedBigInteger('id_film');
+            $table->foreign('id_film')->references('id')->on('films');
             $table->timestamps();
         });
     }

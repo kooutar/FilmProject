@@ -19,6 +19,8 @@ class SessionRepository implements SessionInterface
      return Session::find($id);
     }
     public function create(array $data){
+     
+
       Session::create($data);  
     }
 
