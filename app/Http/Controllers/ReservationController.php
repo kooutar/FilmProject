@@ -51,7 +51,8 @@ class ReservationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->ReservationService->deleteReservationService($id);
+        return response()->json('delete reservation');
     }
 
     public function UpdatePaiment($id){

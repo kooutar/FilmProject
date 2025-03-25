@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Repository;
 use App\Models\Reservation;
-use App\Repositories\Interfeces\ReservationInterface;
+use App\Jobs\expeirdResevation;
 use Illuminate\Support\Facades\DB;
+use App\Repositories\Interfeces\ReservationInterface;
 
 class ReservationRepository implements ReservationInterface
 {
@@ -34,22 +35,29 @@ class ReservationRepository implements ReservationInterface
            'created_at' => now(),
            'updated_at' => now(),
         ]);
+        $reservation=$this->findById($reservation_id);
+        expeirdResevation::dispatch($reservation)->delay(now()->addMinutes(15));
         $seat=$this->SeatReposotory->findById($data['id_seat']);
       
         $this->SeatReposotory->updateReservation($seat->id,  $reservation_id);
      }
 
-     public function update(array $data){
+     public function update(array $data,$id){
 
      }
-     public function delete($id){}
+     public function delete($id){
+        $this->SeatReposotory->findSeatReservedByClient($id);
+        $reservation =$this->findById($id);
+        return $reservation->delete();
+    
+     }
      public function updateStatusPaiment($idReservation)
      {
     DB::table('_reservation')
         ->where('id', $idReservation)
         ->update([
-            'status' => 'paid',  // Nouvelle valeur
-            'updated_at' => now()  // Mise à jour du timestamp
+            'status' => 'paid', 
+            'updated_at' => now()  
         ]);
 
     return response()->json(['message' => 'Statut de paiement mis à jour avec succès']);

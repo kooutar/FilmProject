@@ -21,4 +21,8 @@ class ReservationService
     public function updateStatusPaimentService($idReservation){
         return $this->ReservationRepository->updateStatusPaiment($idReservation);
     }
+
+    public function deleteReservationService($idReservation){
+     return $this->ReservationRepository->delete($idReservation);
+    }
 }

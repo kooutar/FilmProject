@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Repository;
 use App\Models\Seat;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\Interfeces\SeatInterface;
 
 class SeatRepository implements SeatInterface
@@ -33,5 +34,11 @@ class SeatRepository implements SeatInterface
         $seat->id_reservation=$idreservation;
         $seat->save();
       }
+
+      public function findSeatReservedByClient($idreservation){
+        DB::table('seats')
+            ->where('id_reservation', $idreservation)
+            ->update(['id_reservation' => null]);
+    }
 
 }
