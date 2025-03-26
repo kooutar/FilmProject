@@ -18,7 +18,7 @@ class ReservationRepository implements ReservationInterface
     }
 
      public function all(){
-
+       return Reservation::all();
      }
      public function findById($id){
         return Reservation::find($id);
@@ -42,9 +42,23 @@ class ReservationRepository implements ReservationInterface
         $this->SeatReposotory->updateReservation($seat->id,  $reservation_id);
      }
 
-     public function update(array $data,$id){
-
+     public function update(array $data, $id)
+     {
+         // Rechercher la réservation par ID
+         $reservation = DB::table('_reservation')->where('id', $id)->first();
+     
+         // Vérifier si la réservation existe
+         if (!$reservation) {
+             return response()->json(['message' => 'Réservation non trouvée'], 404);
+         }
+     
+         // Mettre à jour la réservation
+         DB::table('_reservation')->where('id', $id)->update($data);
+     
+         // Renvoyer la réponse JSON avec le statut de mise à jour
+         return response()->json(['message' => 'Réservation mise à jour avec succès'], 200);
      }
+     
      public function delete($id){
         $this->SeatReposotory->findSeatReservedByClient($id);
         $reservation =$this->findById($id);
@@ -59,8 +73,21 @@ class ReservationRepository implements ReservationInterface
             'status' => 'paid', 
             'updated_at' => now()  
         ]);
+    
+        $reservations = DB::table('users')
+        ->join('_reservation', '_reservation.id_client', '=', 'users.id')
+        ->join('seance', '_reservation.id_seance', '=', 'seance.id')
+        ->join('films', 'seance.id_film', '=', 'films.id')
+        ->join('salles', 'salles.id', '=', 'seance.id_salle') // D'abord lier la salle à la séance
+        ->join('seats', 'seats.id_salle', '=', 'salles.id') // Ensuite ajouter les sièges
+        ->get();
+        if ($reservations->isEmpty()) {
+            return response()->json(['message' => 'Aucune réservation trouvée'], 404);
+        }
+        return response()->json(['reservations' => $reservations], 200);
+        
+       
 
-    return response()->json(['message' => 'Statut de paiement mis à jour avec succès']);
   }
 
 }

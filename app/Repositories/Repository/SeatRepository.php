@@ -12,22 +12,72 @@ class SeatRepository implements SeatInterface
      */
    
    
-      public function all(){
+     public function all()
+{
+   
+    $seats = Seat::all();
 
-      }
-      public function findById($id){
-       return Seat::find($id);
-      }
-      public function create(array $data){
-        Seat::create($data);  
-      }
+   
+    return response()->json(['seats' => $seats], 200);
+}
+
+public function findById($id)
+{
+   
+    $seat = Seat::find($id);
+
+  
+    if (!$seat) {
+        return response()->json(['message' => 'Siège non trouvé'], 404);
+    }
+
+
+    return response()->json(['seat' => $seat], 200);
+}
+
+public function create(array $data)
+{
+ 
+    $seat = Seat::create($data);
+
+    
+    return response()->json(['message' => 'Siège créé avec succès', 'seat' => $seat], 201);
+}
+
      
-      public function update(array $data){
+public function update(array $data,$id)
+{
+   
+    $seat = Seat::find($id);
 
-      }
-      public function delete($id){
-          
-      }
+   
+    if (!$seat) {
+        return response()->json(['message' => 'Siège non trouvé'], 404);
+    }
+
+    
+    $seat->update($data);
+
+   
+    return response()->json(['message' => 'Siège mis à jour avec succès', 'seat' => $seat], 200);
+}
+
+public function delete($id)
+{
+ 
+    $seat = Seat::find($id);
+
+   
+    if (!$seat) {
+        return response()->json(['message' => 'Siège non trouvé'], 404);
+    }
+
+
+    $seat->delete();
+
+    return response()->json(['message' => 'Siège supprimé avec succès'], 200);
+}
+
 
       public function updateReservation($idseat,$idreservation){
         $seat=$this->findById($idseat);

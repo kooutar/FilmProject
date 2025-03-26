@@ -10,8 +10,13 @@ class FilmRespository implements FilmRepositoryInterface
     /**
      * Create a new class instance.
      */
-    public function all(){
-
+    public function all()
+    {
+        
+        $Films = Film::all();
+    
+        
+        return response()->json(['Films' => $Films], 200);
     }
     public function findById($id){
        return Film::find($id); 

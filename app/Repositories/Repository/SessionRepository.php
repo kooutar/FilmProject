@@ -12,8 +12,11 @@ class SessionRepository implements SessionInterface
      */
    
 
-    public function all(){
-
+     public function all()
+    {
+        
+        $Session = Session::all();
+        return response()->json(['Session' => $Session], 200);
     }
     public function findById($id){
      return Session::find($id);

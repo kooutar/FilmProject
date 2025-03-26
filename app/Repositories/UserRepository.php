@@ -37,4 +37,36 @@ class UserRepository implements UserRepositoryInterface
     ]);
 
     }
+
+    public function update(array $data, $id)
+{
+    // Recherche l'utilisateur avec l'ID passé
+    $user = User::find($id);
+
+    // Si l'utilisateur n'existe pas, retourne une erreur
+    if (!$user) {
+        return response()->json(['message' => 'Utilisateur non trouvé'], 404);
+    }
+
+    // Met à jour l'utilisateur avec les données envoyées
+    $user->update($data);
+
+    // Retourne une réponse JSON avec un message de succès et les données de l'utilisateur mis à jour
+    return response()->json(['message' => 'Utilisateur mis à jour avec succès', 'user' => $user], 200);
+}
+public function logout($request)
+{
+    // Déconnecte l'utilisateur
+    Auth::logout();
+
+    // Supprime la session
+    $request->session()->invalidate();
+
+    // Régénère l'ID de session pour la sécurité
+    $request->session()->regenerateToken();
+
+    // Retourne une réponse JSON ou redirige l'utilisateur
+    return response()->json(['message' => 'Utilisateur déconnecté avec succès'], 200);
+}
+
 }
