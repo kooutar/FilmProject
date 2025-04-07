@@ -13,6 +13,10 @@ use App\Http\Middleware\ClientMiddleware;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
+Route::get('/login',function(){
+    return view('login');
+});
+
 
 Route::resource('Auth', UserController::class);
 Route::post('/registre', [UserController::class,'store']);
