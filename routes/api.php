@@ -15,6 +15,7 @@ use App\Http\Middleware\ClientMiddleware;
 // })->middleware('auth:sanctum');
 
 Route::resource('Auth', UserController::class);
+Route::post('/registre', [UserController::class,'store']);
 Route::post('/login',[UserController::class,'login']);
 
 
