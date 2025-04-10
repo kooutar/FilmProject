@@ -19,6 +19,7 @@
             </div>
             
             <form class="mt-8 space-y-6" id="FormLogin" method="POST">
+                <div id="result"></div>
                 <div class="rounded-md shadow-sm space-y-5">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Adresse email</label>
@@ -101,6 +102,9 @@
             </div>
         </div>
     </div>
-    {{ asset('js/login.js')}}
+    <script src="{{ asset('js/login.js')}}"></script>
+    {{-- <script>
+        console.log('kaoutar')
+    </script> --}}
 </body>
 </html>

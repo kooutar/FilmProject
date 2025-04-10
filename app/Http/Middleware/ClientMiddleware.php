@@ -19,7 +19,7 @@ class ClientMiddleware
 
         // Vérifie si l'utilisateur est connecté et est un administrateur
         if (!$user || $user->role !== 'client') {
-            return response()->json(['error' => 'Accès non autorisé'], 403); // 403 Forbidden
+            return response()->json(['error' => 'Accès non autorisé client '], 403); // 403 Forbidden
         }
 
         return $next($request); // 

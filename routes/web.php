@@ -9,3 +9,6 @@ Route::get('/', function () {
 Route::get('payment/create', [PaymentController::class, 'createPayment']);
 Route::get('payment/status', [PaymentController::class, 'paymentStatus'])->name('payment.status');
 Route::get('payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
+Route::get('/home',function(){
+    return view('home');
+  });

@@ -17,7 +17,7 @@ class FilmController extends Controller
     }
     public function index()
     {
-        //
+       return $this->FilmService->getAll();
     }
 
     /**

@@ -24,16 +24,23 @@ Route::post('/login',[UserController::class,'login']);
 
 
 Route::middleware(['auth:api',AdminMiddleware::class])->group(function(){
-    Route::resource('Film',FilmController::class);
+    // Route::resource('Film',FilmController::class);
+    // Route::get('/films',[FilmController::class,'index']);
+    Route::post('/film',[FilmController::class,'store']);
     Route::resource('Session',SessionController::class);
     Route::resource('salle',SalleController::class);
 });
 
 
 Route::middleware(['auth:api',ClientMiddleware::class])->group(function(){
+    Route::get('/films',[FilmController::class,'index']);
     Route::resource('Reservation',ReservationController::class); 
     Route::put('/paiment/{id}',[ReservationController::class,'UpdatePaiment']);  
 });
 
+  Route::get('/addfilm',function(){
+        return view('addFilm');
+    });
 
+    Route::post('/addfilm',[FilmController::class,'store']);
 

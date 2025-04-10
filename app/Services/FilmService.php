@@ -27,4 +27,7 @@ class FilmService
     public function deleteFilmService($id){
         return $this->FilmRespository->delete($id);
     }
+    public function getAll(){
+        return $this->FilmRespository->all();
+    }
 }
